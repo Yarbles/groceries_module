@@ -1,0 +1,55 @@
+<?php
+function groceries_menu() {
+    $items = array();
+    $items['groceries'] = array (
+        'title' => 'Groceries',
+        'page callback' => 'groceries',
+        'access callback' => TRUE,
+        'type' => MENU_NORMAL_ITEM,
+    );
+    return $items;
+}
+
+function groceries() {
+    $list['eggs'] = array(
+        'quantity' => array(
+            'number' => 2,
+            'measurement' => 'dozen',
+        ),
+        'price' => 2,
+    );
+    $list['milk'] = array(
+        'quantity' => array(
+            'number' => 3,
+            'measurement' => 'liters',
+        ),
+        'price' => 2,
+    );
+    $list['bacon'] = array(
+        'quantity' => array(
+            'number' => 50,
+            'measurement' => 'dozen strips',
+        ),
+        'price' => 3,
+    );
+
+
+    $result = null;
+    $test = "";
+
+    foreach ($list as $key => $list_item) {
+
+        $test = $test . $list_item['quantity']['number'] . " " . $list_item['quantity']['measurement'] . " " . $key ." at"  . " $" . $list_item['price'] . " each";
+
+        $item_price = $list_item['quantity']['number'] * $list_item['price'];
+
+        $test = $test . "<li>$" . $item_price . "</li></p>";
+        // $result = $result . "</p>";
+
+        $result = $result + $item_price;
+
+    }
+
+    return  '<p>Brian and Reids SUPER AWESOME list two: </p><p>' . $test . ' </p>' . 'TOTAL PRICE: $' . $result;
+
+}
